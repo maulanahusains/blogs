@@ -1,7 +1,9 @@
 <script setup>
     import sidebar from './Sidebar.vue';
     import CardVue from '../Card.vue';
+    import Input from '../Input.vue';
     import Table from '../Table.vue';
+    import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -11,9 +13,7 @@
             <slot name="content">
                 <CardVue>
                     <template #card-content>
-                        <Table>
-                            
-                        </Table>
+                       
                     </template>
                 </CardVue>
             </slot>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BlogController extends Controller
 {
@@ -12,7 +13,10 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'blogs' => Blog::all()
+        );
+        return Inertia::render('Blogs/Index', $data);
     }
 
     /**
@@ -20,7 +24,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Blogs/Create');
     }
 
     /**
@@ -44,7 +48,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return Inertia::render('Blogs/edit', $blog);
     }
 
     /**
