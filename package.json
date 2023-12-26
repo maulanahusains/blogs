@@ -19,6 +19,8 @@
         "perfect-scrollbar": "^1.5.5",
         "postcss": "^8.4.31",
         "postcss-import": "^15.1.0",
+        "prettier": "^3.1.1",
+        "prettier-plugin-tailwindcss": "^0.5.9",
         "tailwindcss": "^3.2.1",
         "vite": "^5.0.0",
         "vue": "^3.2.41"

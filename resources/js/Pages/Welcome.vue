@@ -1,5 +1,10 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3';
+import { SearchIcon, MenuFoldLineRightIcon } from '@/Components/Icons/outline.jsx';
+import Button from '@/Components/Button.vue';
+import { ref } from 'vue';
+
+const navShow = ref(false);
 
 defineProps({
     canLogin: Boolean,
@@ -10,115 +15,173 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Landing Page" />
 
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-200 sm:items-center sm:pt-0">
-        <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <Link v-if="$page.props.auth.user" href="/dashboard" class="text-sm text-gray-700 underline">
-                Dashboard
+    <!-- Navbar -->
+    <nav class="container mx-auto flex items-center justify-between py-5 px-4 md:px-0 lg:px-0">
+        <h1 class="text-2xl">SportsBlogs</h1>
+        <div class="hidden md:flex md:flex-row items-center justify-center gap-9">
+            <Link href="#">NBA</Link>
+            <Link href="#">NFL</Link>
+            <Link href="#">NHL</Link>
+            <Link href="#">MLD</Link>
+            <Link href="#">SOCCER</Link>
+        </div>
+        <button @click="navShow = !navShow" class="md:hidden">
+            <MenuFoldLineRightIcon class="w-6 h-6" />
+        </button>
+        <div class="hidden md:flex lg:flex items-center gap-4 justify-end">
+            <SearchIcon class="w-6 h-6" />
+            <Button href="/login" type="button">Sign In</Button>
+        </div>
+    </nav>
+    <Transition>
+        <div v-if="navShow" class="relative z-10">
+            <div class="relative w-screen h-screen top-0 bg-white">
+                <div class="flex flex-col mt-10 items-center justify-center gap-6 text-xl mx-auto w-11/12">
+                    <Link href="#" class="w-full text-center">NBA</Link>
+                    <Link href="#" class="w-full text-center">NFL</Link>
+                    <Link href="#" class="w-full text-center">NHL</Link>
+                    <Link href="#" class="w-full text-center">MLD</Link>
+                    <Link href="#" class="w-full text-center">SOCCER</Link>
+                    <Link class="bg-purple-500 w-full text-center text-white py-2 rounded-lg">Sign In</Link>
+                </div>
+            </div>
+        </div>
+    </Transition>
+
+    <!-- End Nav -->
+
+    <main>
+        <!-- Hero -->
+        <div
+            class="container flex items-center md:rounded-lg justify-center mx-auto w-full h-[23rem] md:h-[19rem] bg-[#16243E]">
+            <Link class="text-white border border-3 border-white px-8 py-2 rounded-xl hover:bg-white hover:text-black">
+            Subscribe
             </Link>
-
-            <template v-else>
-                <Link :href="route('login')" class="text-sm text-gray-700 underline">
-                    Log in
-                </Link>
-
-                <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
-                    Register
-                </Link>
-            </template>
         </div>
+        <!-- End Hero -->
 
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                    <g clip-path="url(#clip0)" fill="#EF3B2D">
-                        <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                    </g>
-                </svg>
-            </div>
-
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                            </div>
-                        </div>
+        <!-- Blogs -->
+        <div class="container mx-auto py-5 px-4 md:px-0 lg:px-0">
+            <div class="flex flex-col gap-14 justify-between md:flex-row">
+                <!-- Card -->
+                <div class="flex flex-col w-full h-full md:w-1/2">
+                    <img class="rounded-xl" src="../Components/assets/images/thumbnail.png" alt="">
+                    <h1 class="mt-4 text-2xl font-semibold">Melvin Gordon is making the right decision walking away from the
+                        Chargers
+                    </h1>
+                    <div class="flex text-gray-500 gap-2">
+                        <p>By Gabie Sheber</p>
+                        <p>-</p>
+                        <p>Mar 28, 2020</p>
                     </div>
                 </div>
-            </div>
+                <!-- End Card -->
 
-            <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 sm:text-left">
-                    <div class="flex items-center">
-                        <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-
-                        <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                            Shop
-                        </a>
-
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                        </svg>
-
-                        <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                            Sponsor
-                        </a>
+                <div class="flex flex-col w-full h-full md:w-1/2 gap-12">
+                    <div class="flex w-full h-full gap-2">
+                        <img class="w-1/3 rounded-xl" src="../Components/assets/images/thumbnail2.png" alt="">
+                        <div class="flex flex-col">
+                            <h1 class="text-2xl max-w-[75%] font-semibold">Titans Post Elite PFF Tackling in 2019</h1>
+                            <div class="flex text-gray-500 gap-2">
+                                <p>By Gabie Sheber</p>
+                                <p>-</p>
+                                <p>Mar 28, 2020</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="flex w-full h-full gap-2">
+                        <img class="w-1/3 rounded-xl" src="../Components/assets/images/thumbnail2.png" alt="">
+                        <div class="flex flex-col">
+                            <h1 class="text-2xl max-w-[75%] font-semibold">Titans Post Elite PFF Tackling in 2019</h1>
+                            <div class="flex text-gray-500 gap-2">
+                                <p>By Gabie Sheber</p>
+                                <p>-</p>
+                                <p>Mar 28, 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full h-full gap-2">
+                        <img class="w-1/3 rounded-xl" src="../Components/assets/images/thumbnail2.png" alt="">
+                        <div class="flex flex-col">
+                            <h1 class="text-2xl max-w-[75%] font-semibold">Titans Post Elite PFF Tackling in 2019</h1>
+                            <div class="flex text-gray-500 gap-2">
+                                <p>By Gabie Sheber</p>
+                                <p>-</p>
+                                <p>Mar 28, 2020</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
                 </div>
             </div>
         </div>
-    </div>
+        <!-- EndBlogs -->
+    </main>
+
+    <footer>
+        <div class="w-full bg-slate-300 p-8 rounded-lg">
+            <div class="flex flex-col gap-24 pt-24">
+                <div class="flex items-center justify-center">
+                    <div class="relative flex items-center w-1/3">
+                        <input type="text"
+                            class="-z-2 w-full border border-solid focus:outline-none focus:ring-0 focus:border-purple-500 border-transparent rounded-3xl"
+                            placeholder="Your@gmail.com">
+                        <Button class="rounded-3xl z-2 absolute right-0">Send</Button>
+                    </div>
+                </div>
+
+                <div class="container mx-auto flex items-center justify-between">
+                    <div class="flex justify-center items-center gap-9 text-white">
+                        <Link href="#">ABOUT</Link>
+                        <Link href="#">CONTACT US</Link>
+                        <Link href="#">HELP</Link>
+                        <Link href="#">STORE</Link>
+                    </div>
+                    <div class="flex">
+                        <svg width="108" class="fill-white" height="26" viewBox="0 0 108 26" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M101.5 0H88.5C84.9253 0 82 2.92532 82 6.5V19.5006C82 23.0744 84.9253 26.0006 88.5 26.0006H101.5C105.075 26.0006 108 23.0744 108 19.5006V6.5C108 2.92532 105.075 0 101.5 0ZM105.833 19.5006C105.833 21.8894 103.89 23.8339 101.5 23.8339H88.5C86.1109 23.8339 84.1668 21.8894 84.1668 19.5006V6.5C84.1668 4.11062 86.1109 2.16677 88.5 2.16677H101.5C103.89 2.16677 105.833 4.11062 105.833 6.5V19.5006Z" />
+                            <path
+                                d="M101.215 15.4449H99.0091V24.3754H95.741C95.741 24.3754 95.741 19.4957 95.741 15.4449H94.1875V12.2885H95.741V10.2469C95.741 8.78475 96.3526 6.5 99.0391 6.5L101.461 6.51055V9.57446C101.461 9.57446 99.9893 9.57446 99.7031 9.57446C99.417 9.57446 99.0102 9.73699 99.0102 10.4343V12.2891H101.5L101.215 15.4449Z" />
+                            <path
+                                d="M60.5 0H47.5C43.9253 0 41 2.92532 41 6.5V19.5006C41 23.0744 43.9253 26.0006 47.5 26.0006H60.5C64.0747 26.0006 67 23.0744 67 19.5006V6.5C67 2.92532 64.0747 0 60.5 0ZM64.8332 19.5006C64.8332 21.8894 62.8901 23.8339 60.5 23.8339H47.5C45.1109 23.8339 43.1668 21.8894 43.1668 19.5006V6.5C43.1668 4.11062 45.1109 2.16677 47.5 2.16677H60.5C62.8901 2.16677 64.8332 4.11062 64.8332 6.5V19.5006Z" />
+                            <path
+                                d="M61.052 8.90393C60.9949 8.92137 60.9374 8.93793 60.8795 8.9536C60.6828 9.0068 60.5396 8.76076 60.6799 8.61069C60.8272 8.45323 60.9569 8.27897 61.066 8.09118C61.1682 7.91521 60.9882 7.71049 60.8056 7.79567C60.4269 7.97221 60.0259 8.10837 59.6079 8.19955C59.5403 8.21427 59.4706 8.19089 59.4212 8.1416C57.5025 6.22577 54.1718 7.87585 54.5743 10.5864C54.5939 10.7184 54.4847 10.833 54.3541 10.8222C52.1913 10.6422 50.2686 9.61458 48.917 8.07084C48.8189 7.95881 48.6396 7.98611 48.5791 8.12297C48.1231 9.15522 48.3165 10.3699 49.0715 11.2085C49.212 11.3646 49.0637 11.611 48.8646 11.5499C48.671 11.4905 48.486 11.4112 48.3125 11.3146V11.351C48.3125 12.4372 48.9149 13.3833 49.8029 13.8711C49.9829 13.97 49.9522 14.2816 49.6481 14.2591C49.4936 14.2478 49.381 14.4097 49.4475 14.5522C49.8254 15.3628 50.5699 15.9676 51.467 16.1516C51.6483 16.1887 51.6921 16.4316 51.5354 16.5319C50.6386 17.1064 49.6216 17.408 48.5951 17.4365C48.3824 17.4423 48.3186 17.7346 48.5096 17.8303C49.6029 18.3779 50.835 18.6878 52.1392 18.6878C57.4043 18.6878 60.2821 14.3135 60.2821 10.5193C60.2821 10.4317 60.2813 10.344 60.2788 10.2568C60.2769 10.1883 60.3078 10.124 60.3619 10.0833C60.6899 9.83642 60.9915 9.55386 61.2605 9.24261C61.3958 9.08603 61.2481 8.8441 61.052 8.90393Z" />
+                            <path
+                                d="M19.5 0H6.5C2.92532 0 0 2.92532 0 6.5V19.5006C0 23.0744 2.92532 26.0006 6.5 26.0006H19.5C23.0747 26.0006 26 23.0744 26 19.5006V6.5C26 2.92532 23.0747 0 19.5 0ZM23.8332 19.5006C23.8332 21.8894 21.8901 23.8339 19.5 23.8339H6.5C4.11093 23.8339 2.16677 21.8894 2.16677 19.5006V6.5C2.16677 4.11062 4.11093 2.16677 6.5 2.16677H19.5C21.8901 2.16677 23.8332 4.11062 23.8332 6.5V19.5006Z" />
+                            <path
+                                d="M13 6.5C9.40938 6.5 6.5 9.4097 6.5 13C6.5 16.589 9.40938 19.5006 13 19.5006C16.5896 19.5006 19.5 16.589 19.5 13C19.5 9.4097 16.5896 6.5 13 6.5ZM13 17.3339C10.607 17.3339 8.66677 15.3936 8.66677 13C8.66677 10.6064 10.607 8.66677 13 8.66677C15.393 8.66677 17.3332 10.6064 17.3332 13C17.3332 15.3936 15.393 17.3339 13 17.3339Z" />
+                        </svg>
+                    </div>
+                    <div class="flex text-white">
+                        <p>
+                            Designed by
+                            <a target="_blank" href="https://www.figma.com/@uchiha5555"
+                                class="hover:text-black hover:underline">
+                                Uchiha5555</a> &
+                            Developed By
+                            <a target="_blank" href="https://github.com/maulanahusains"
+                                class="hover:text-black hover:underline">
+                                Maulana</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+</style>

@@ -1,6 +1,6 @@
 // Extra icons
 
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export const MenuFoldLineRightIcon = defineComponent({
     setup() {
@@ -18,9 +18,9 @@ export const MenuFoldLineRightIcon = defineComponent({
                     stroke-linejoin="round"
                 />
             </svg>
-        )
+        );
     },
-})
+});
 
 export const MenuFoldLineLeftIcon = defineComponent({
     setup() {
@@ -38,9 +38,9 @@ export const MenuFoldLineLeftIcon = defineComponent({
                     stroke-linejoin="round"
                 />
             </svg>
-        )
+        );
     },
-})
+});
 
 export const DashboardIcon = defineComponent({
     setup() {
@@ -62,9 +62,9 @@ export const DashboardIcon = defineComponent({
                     d="M12 3C9.34784 3 6.8043 4.05357 4.92893 5.92893C3.05357 7.8043 2 10.3478 2 13C2 14.3132 2.25866 15.6136 2.7612 16.8268C3.26375 18.0401 4.00035 19.1425 4.92893 20.0711C5.11647 20.2586 5.37082 20.364 5.63604 20.364H18.364C18.6292 20.364 18.8835 20.2586 19.0711 20.0711C19.9997 19.1425 20.7362 18.0401 21.2388 16.8268C21.7413 15.6136 22 14.3132 22 13C22 10.3478 20.9464 7.8043 19.0711 5.92893C17.1957 4.05357 14.6522 3 12 3ZM6.34315 7.34315C7.84344 5.84285 9.87827 5 12 5C14.1217 5 16.1566 5.84285 17.6569 7.34315C19.1571 8.84344 20 10.8783 20 13C20 14.0506 19.7931 15.0909 19.391 16.0615C19.0406 16.9075 18.5479 17.6861 17.9353 18.364H6.06469C5.45205 17.6861 4.95938 16.9075 4.60896 16.0615C4.20693 15.0909 4 14.0506 4 13C4 10.8783 4.84285 8.84344 6.34315 7.34315Z"
                 />
             </svg>
-        )
+        );
     },
-})
+});
 
 export const ArrowsInnerIcon = defineComponent({
     setup() {
@@ -82,9 +82,9 @@ export const ArrowsInnerIcon = defineComponent({
                     stroke-linejoin="round"
                 />
             </svg>
-        )
+        );
     },
-})
+});
 
 export const EmptyCircleIcon = defineComponent({
     setup() {
@@ -102,6 +102,27 @@ export const EmptyCircleIcon = defineComponent({
                     stroke-linejoin="round"
                 />
             </svg>
-        )
+        );
     },
-})
+});
+
+export const SearchIcon = defineComponent({
+    setup() {
+        return () => (
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M0 6.75C0 10.4779 3.02208 13.5 6.75 13.5C8.30847 13.5 9.74359 12.9718 10.8861 12.0847C10.9291 12.1758 10.9883 12.2611 11.0636 12.3364L16.4636 17.7364C16.8151 18.0879 17.3849 18.0879 17.7364 17.7364C18.0879 17.3849 18.0879 16.8151 17.7364 16.4636L12.3364 11.0636C12.2611 10.9883 12.1758 10.9291 12.0847 10.8861C12.9718 9.74359 13.5 8.30847 13.5 6.75C13.5 3.02208 10.4779 0 6.75 0C3.02208 0 0 3.02208 0 6.75ZM1.8 6.75C1.8 4.01619 4.01619 1.8 6.75 1.8C9.48381 1.8 11.7 4.01619 11.7 6.75C11.7 9.48381 9.48381 11.7 6.75 11.7C4.01619 11.7 1.8 9.48381 1.8 6.75Z"
+                    fill="#141A28"
+                />
+            </svg>
+        );
+    },
+});
