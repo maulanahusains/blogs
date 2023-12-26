@@ -1,6 +1,6 @@
 # Simple blogs
 
-This project originated from my inclination to explore design without a predetermined plan. Initially, I had no specific design ideas or outlined strategies. However, after a while, I stumbled upon a remarkably captivating design on [Figma](https://www.figma.com/community/file/1302870720925686397/sportsblog-blogging-platform) by [Uchiha5555](https://github.com/uchiha5555).
+This project originated from my inclination to explore design without a predetermined plan. Initially, I had no specific design ideas or outlined strategies. However, after a while, I stumbled upon a remarkably captivating design on [Figma](https://www.figma.com) by [Uchiha5555](https://github.com/uchiha5555).
 
 This inspiration struck spontaneously. I felt compelled to incorporate the design elements I discovered on Figma into my own project.
 
